@@ -45,7 +45,7 @@ const Login: React.FC<LoginProps> = ({ onLogin, onForgotPassword }) => {
                 <div className="flex justify-between items-start mb-8">
                   <div>
                     <h3 className="text-2xl font-black text-black tracking-tight">Solicitar Acesso</h3>
-                    <p className="text-zinc-400 text-xs font-bold uppercase tracking-widest mt-1">Nexus Security Gate</p>
+                    <p className="text-zinc-400 text-xs font-bold uppercase tracking-widest mt-1"><br/>TAD<br/>TELMAX</p>
                   </div>
                   <button 
                     onClick={() => setIsRequestModalOpen(false)}
@@ -151,10 +151,12 @@ const Login: React.FC<LoginProps> = ({ onLogin, onForgotPassword }) => {
         <div className="bg-white rounded-[2.5rem] shadow-[0_20px_80px_-15px_rgba(0,0,0,0.6)] p-8 lg:p-10 border border-white/10">
             {/* Minimalist Logo/Header */}
             <div className="flex flex-col items-center mb-8">
-              <div className="w-16 h-16 bg-[#e1251a] rounded-2xl flex items-center justify-center shadow-xl shadow-red-600/20 mb-4 transition-transform hover:scale-105 active:scale-95 cursor-pointer">
-                <span className="font-black text-white text-2xl">N</span>
+              <div className="w-16 h-16 bg-[#000000] rounded-2xl flex items-center justify-center shadow-xl shadow-red-600/20 mb-4 transition-transform hover:scale-105 active:scale-95 cursor-pointer">
+                <span className="font-black text-white text-2xl">
+                  <img src="../assets/logo.png" alt="Logo" />
+                </span>
               </div>
-              <h1 className="text-2xl font-black text-black tracking-tightest">Nexus Sync</h1>
+              <h1 className="text-2xl text-black tracking-tightest"><strong><b>TAD</b></strong>TELMAX</h1>
               <p className="text-zinc-400 mt-1 font-bold uppercase text-[9px] tracking-[0.3em]">Protocolo de Segurança</p>
             </div>
 
