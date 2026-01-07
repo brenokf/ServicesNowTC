@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { getSystemInsights } from '../services/geminiService';
-import { User, UserRole, Project, ItemStatus } from '../types';
+import { User, UserRole, Project, ItemStatus, Client, Region } from '../types';
 import { MOCK_PROJECTS, MOCK_USERS, STATUS_COLORS } from '../constants';
 
 const MOCK_ACTIVITY_DATA = [
@@ -32,11 +32,53 @@ type TabType = 'Projeto' | 'LOGS' | 'FUNCION' | 'Performance' | 'bidr' | 'dualba
 const Dashboard: React.FC<DashboardProps> = ({ user }) => {
   const [aiInsight, setAiInsight] = useState<string>("Sincronizando dados operacionais...");
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [selectedClient, setSelectedClient] = useState<string>('All');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [activeTab, setActiveTab] = useState<TabType>('Projeto');
+  const [selectedType, setSelectedType] = useState<'all' | 'client' | 'tester'>('all');
+  const [selectedRegion, setSelectedRegion] = useState<string>('all');
+  const [selectedClient, setSelectedClient] = useState<Client | null>(null);
   
+const clientsData: Client[] = [
+    { id: 1, name: "TechCorp Inc.", type: "client", location: { lat: 40.7128, lng: -74.0060 }, country: "USA", city: "New York", industry: "Technology", joinDate: "2022-01-15" },
+    { id: 2, name: "Global Retail", type: "client", location: { lat: 51.5074, lng: -0.1278 }, country: "UK", city: "London", industry: "Retail", joinDate: "2021-03-22" },
+    { id: 3, name: "Beta Tester Group", type: "tester", location: { lat: 35.6762, lng: 139.6503 }, country: "Japan", city: "Tokyo", devices: ["Mobile", "Desktop"], since: "2023-05-10" },
+    { id: 4, name: "AutoManufacture", type: "client", location: { lat: 52.5200, lng: 13.4050 }, country: "Germany", city: "Berlin", industry: "Automotive", joinDate: "2020-11-30" },
+    { id: 5, name: "QA Experts Ltd", type: "tester", location: { lat: -23.5505, lng: -46.6333 }, country: "Brazil", city: "São Paulo", devices: ["Tablet", "Mobile"], since: "2023-08-14" },
+    { id: 6, name: "FinServe Bank", type: "client", location: { lat: 1.3521, lng: 103.8198 }, country: "Singapore", city: "Singapore", industry: "Finance", joinDate: "2022-07-19" },
+    { id: 7, name: "App Testers AU", type: "tester", location: { lat: -33.8688, lng: 151.2093 }, country: "Australia", city: "Sydney", devices: ["Desktop", "Mobile"], since: "2023-02-28" },
+    { id: 8, name: "MediCare Systems", type: "client", location: { lat: 48.8566, lng: 2.3522 }, country: "France", city: "Paris", industry: "Healthcare", joinDate: "2021-09-05" },
+    { id: 9, name: "Africa Beta Group", type: "tester", location: { lat: -26.2041, lng: 28.0473 }, country: "South Africa", city: "Johannesburg", devices: ["Mobile"], since: "2023-11-12" },
+    { id: 10, name: "E-Commerce Global", type: "client", location: { lat: 19.4326, lng: -99.1332 }, country: "Mexico", city: "Mexico City", industry: "E-commerce", joinDate: "2023-01-20" }
+  ];
+
+  const regions: Region[] = [
+    { value: 'all', label: 'Todos' },
+    { value: 'americas', label: 'Américas' },
+    { value: 'europe', label: 'Europa' },
+    { value: 'asia', label: 'Ásia' },
+    { value: 'africa', label: 'África' },
+    { value: 'oceania', label: 'Oceania' }
+  ];
+
+  const filteredClients = clientsData.filter(client => {
+    if (selectedType !== 'all' && client.type !== selectedType) return false;
+    
+    if (selectedRegion !== 'all') {
+      const regionMap: Record<string, string[]> = {
+        'americas': ['USA', 'Brazil', 'Mexico', 'Canada'],
+        'europe': ['UK', 'Germany', 'France', 'Spain'],
+        'asia': ['Japan', 'Singapore', 'China', 'India'],
+        'africa': ['South Africa', 'Nigeria', 'Kenya'],
+        'oceania': ['Australia', 'New Zealand']
+      };
+      return regionMap[selectedRegion]?.includes(client.country) || false;
+    }
+    
+    return true;
+  });
+
+
   const carouselRef = useRef<HTMLDivElement>(null);
   const isAdmin = user.role === UserRole.ADMIN;
 
