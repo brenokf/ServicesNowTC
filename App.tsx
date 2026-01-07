@@ -15,6 +15,8 @@ const App: React.FC = () => {
   const [currentModule, setCurrentModule] = useState<ModuleType>('dashboard');
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
+
+
   // Auto-login for demo purposes or check local storage
   useEffect(() => {
     const savedUser = localStorage.getItem('nexus_user');
