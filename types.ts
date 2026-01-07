@@ -65,5 +65,24 @@ export interface ModuleItem {
   txDown?: string;
   txUp?: string;
 }
+export interface Client {
+  id: number;
+  name: string;
+  type: 'client' | 'tester';
+  location: {
+    lat: number;
+    lng: number;
+  };
+  country: string;
+  city: string;
+  industry?: string; // opcional para clientes
+  joinDate?: string; // opcional para clientes
+  devices?: string[]; // opcional para testers
+  since?: string; // opcional para testers
+}
 
+export interface Region {
+  value: string;
+  label: string;
+}
 export type ModuleType = 'devices' | 'notebooks' | 'profiles' | 'tests' | 'admin' | 'dashboard' | 'projects';
