@@ -42,6 +42,20 @@ export interface Device {
   responsible: string;
 }
 
+export interface Client {
+  id: string;
+  name: string;
+  type: 'client' | 'tester';
+  city: string;
+  country: string;
+  location: {
+    lat: number;
+    lng: number;
+  };
+  industry?: string;
+  devices?: string[];
+}
+
 export interface AuditLog {
   id: string;
   user: string;
