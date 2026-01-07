@@ -1,8 +1,8 @@
 
 import { GoogleGenAI } from "@google/genai";
 
-// Always initialize with process.env.API_KEY directly
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// Always initialize with process.env.GEMINI_API_KEY directly
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY});
 
 export const getSystemInsights = async (systemData: any) => {
   try {
