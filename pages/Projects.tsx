@@ -153,7 +153,6 @@ const Projects: React.FC<ProjectsProps> = ({ user }) => {
         </div>
       </div>
 
-      {/* PORTALS FOR MODALS - INLINED JSX TO PREVENT REMOUNTS ON TAB CHANGE */}
       {isNewModalOpen && createPortal(
         <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4 sm:p-6 lg:p-8 overflow-hidden">
           <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-md animate-fadeIn" onClick={handleCloseModals}></div>
@@ -201,7 +200,6 @@ const Projects: React.FC<ProjectsProps> = ({ user }) => {
           <div className="fixed inset-0 bg-slate-950/90 backdrop-blur-xl animate-fadeIn" onClick={handleCloseModals}></div>
           <div className="relative z-[10001] w-full max-w-6xl max-h-[92vh] flex flex-col bg-[#FDFDFF] rounded-[3rem] shadow-[0_32px_128px_-16px_rgba(0,0,0,0.4)] animate-scaleUp overflow-hidden border border-white/20">
             
-            {/* Detailed Header */}
             <div className="px-10 py-8 bg-white border-b border-slate-100 shrink-0">
               <div className="flex justify-between items-start mb-6">
                 <div className="flex items-center gap-6">
@@ -221,7 +219,6 @@ const Projects: React.FC<ProjectsProps> = ({ user }) => {
                 </button>
               </div>
 
-              {/* Tab Navigation - Purely rendering state change without re-mounting modal */}
               <div className="flex overflow-x-auto custom-scrollbar -mb-8 pb-4 gap-2 no-scrollbar">
                 {tabs.map((tab) => (
                   <button
@@ -239,11 +236,9 @@ const Projects: React.FC<ProjectsProps> = ({ user }) => {
               </div>
             </div>
 
-            {/* Modal Body - Tab Content Renders Here */}
             <div className="p-10 overflow-y-auto custom-scrollbar flex-1 bg-white">
               {activeTab === 'Projeto' && (
                 <div className="space-y-10 animate-fadeIn">
-                  {/* Meta Grid */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     <MetaItem label="titulo" value={selectedProject.name} />
                     <MetaItem label="fabricante" value="Samsung Electronics" />
@@ -256,9 +251,7 @@ const Projects: React.FC<ProjectsProps> = ({ user }) => {
                     <MetaItem label="id do caderno" value="CAD-2024-UX-V3" />
                   </div>
 
-                  {/* Chronometers Section */}
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    {/* Funcionalidade */}
                     <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm relative overflow-hidden group">
                       <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50/50 rounded-full -mr-16 -mt-16 blur-2xl"></div>
                       <h4 className="text-sm font-black text-slate-900 uppercase tracking-[0.2em] mb-8 flex items-center gap-3">
@@ -275,7 +268,6 @@ const Projects: React.FC<ProjectsProps> = ({ user }) => {
                       </div>
                     </div>
 
-                    {/* Performance */}
                     <div className="bg-slate-900 p-8 rounded-[2.5rem] border border-white/5 shadow-2xl relative overflow-hidden group">
                       <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full -mr-16 -mt-16 blur-2xl"></div>
                       <h4 className="text-sm font-black text-white uppercase tracking-[0.2em] mb-8 flex items-center gap-3">
@@ -293,7 +285,6 @@ const Projects: React.FC<ProjectsProps> = ({ user }) => {
                     </div>
                   </div>
 
-                  {/* Description */}
                   <div className="bg-slate-50 p-8 rounded-[2.5rem] border border-slate-100">
                      <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4">Descrição do Projeto</h4>
                      <p className="text-slate-600 text-sm leading-relaxed font-medium italic">
@@ -330,7 +321,6 @@ const Projects: React.FC<ProjectsProps> = ({ user }) => {
   );
 };
 
-// Helper Components for standard Layout items
 const CounterItem = ({ label, value, color, isBold }: { label: string, value: string, color: string, isBold?: boolean }) => (
   <div className="flex flex-col">
     <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">{label}</span>

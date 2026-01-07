@@ -57,32 +57,47 @@ export interface ModuleItem {
   createdAt: string;
   responsible: string;
   description?: string;
-  // Specific fields for notebooks/profiles
+  // Common fields
   type?: string;
   tests?: string;
   approval?: string;
   goodPut?: string;
   txDown?: string;
   txUp?: string;
-}
-export interface Client {
-  id: number;
-  name: string;
-  type: 'client' | 'tester';
-  location: {
-    lat: number;
-    lng: number;
-  };
-  country: string;
-  city: string;
-  industry?: string; // opcional para clientes
-  joinDate?: string; // opcional para clientes
-  devices?: string[]; // opcional para testers
-  since?: string; // opcional para testers
+  // Specific Device/Tests Fields
+  fabricante?: string;
+  modelo?: string;
+  hwVersion?: string;
+  serialNumber?: string;
+  mac24?: string;
+  mac5?: string;
+  mac6?: string;
+  nss24?: string;
+  nss5?: string;
+  nss6?: string;
+  chipset24?: string;
+  chipset5?: string;
+  chipset6?: string;
+  deviceType?: string;
+  connectionType?: string;
+  mainChipset?: string;
+  ram?: string;
+  flash?: string;
+  ethernet?: string;
+  wifiVersion?: string;
+  macLan?: string;
+  macWan?: string;
+  wifiPassword?: string;
+  guiUser?: string;
+  guiPassword?: string;
+  // Tests Specific Table Fields
+  caderno?: string;
+  titulo?: string;
+  categoria?: string;
+  catTR?: string;
+  local?: string;
+  ref?: string;
+  especif?: string;
 }
 
-export interface Region {
-  value: string;
-  label: string;
-}
 export type ModuleType = 'devices' | 'notebooks' | 'profiles' | 'tests' | 'admin' | 'dashboard' | 'projects';

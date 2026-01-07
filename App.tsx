@@ -3,21 +3,20 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import Login from './pages/Login';
+import ForgotPassword from './pages/ForgotPassword';
 import Dashboard from './pages/Dashboard';
 import Modules from './pages/Modules';
 import Admin from './pages/Admin';
 import Projects from './pages/Projects';
-import { User, UserRole, ModuleType, ItemStatus } from './types';
-import { MOCK_USERS, MOCK_DEVICES } from './constants';
+import { User, UserRole, ModuleType, ItemStatus, ModuleItem } from './types';
+import { MOCK_USERS } from './constants';
 
 const App: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
   const [currentModule, setCurrentModule] = useState<ModuleType>('dashboard');
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
 
-
-
-  // Auto-login for demo purposes or check local storage
   useEffect(() => {
     const savedUser = localStorage.getItem('nexus_user');
     if (savedUser) {
@@ -26,7 +25,6 @@ const App: React.FC = () => {
   }, []);
 
   const handleLogin = (email: string) => {
-    // Find mock user or create default
     const foundUser = MOCK_USERS.find(u => u.email === email) || {
       id: Date.now().toString(),
       name: email.split('@')[0],
@@ -38,6 +36,7 @@ const App: React.FC = () => {
     };
     setUser(foundUser);
     localStorage.setItem('nexus_user', JSON.stringify(foundUser));
+    setShowForgotPassword(false);
   };
 
   const handleLogout = () => {
@@ -47,7 +46,10 @@ const App: React.FC = () => {
   };
 
   if (!user) {
-    return <Login onLogin={handleLogin} />;
+    if (showForgotPassword) {
+      return <ForgotPassword onBackToLogin={() => setShowForgotPassword(false)} />;
+    }
+    return <Login onLogin={handleLogin} onForgotPassword={() => setShowForgotPassword(true)} />;
   }
 
   const renderModule = () => {
@@ -57,7 +59,11 @@ const App: React.FC = () => {
       case 'projects':
         return <Projects user={user} />;
       case 'devices':
-        return <Modules type="devices" title="Gerenciamento de Dispositivos" initialItems={MOCK_DEVICES} />;
+        const deviceData: ModuleItem[] = [
+          { id: 'D001', name: 'Archer AX55', fabricante: 'TP-Link', modelo: 'Archer AX55', hwVersion: 'V1.0', serialNumber: 'SN-TPL-981', mac24: 'A1:B2:C3:D4:E5:01', mac5: 'A1:B2:C3:D4:E5:02', nss24: '2', nss5: '2', status: ItemStatus.ACTIVE, createdAt: '2024-01-10', responsible: 'John Doe' },
+          { id: 'D002', name: 'HGW-250', fabricante: 'Huawei', modelo: 'HG8245H', hwVersion: 'V3', serialNumber: 'SN-HUW-221', mac24: 'F9:E8:D7:C6:B5:A1', mac5: 'F9:E8:D7:C6:B5:A2', nss24: '1', nss5: '1', status: ItemStatus.PENDING, createdAt: '2024-02-15', responsible: 'Jane Smith' },
+        ];
+        return <Modules type="devices" title="Gerenciamento de Dispositivos" initialItems={deviceData} />;
       case 'notebooks':
         return <Modules type="notebooks" title="Cadernos de Teste" initialItems={[
           { id: 'N001', name: 'UI Regression Suite', status: ItemStatus.ACTIVE, createdAt: '2024-04-01', responsible: 'John Doe', description: 'Testes de interface de alta fidelidade', tests: '144', type: 'Funcional', approval: '98%' },
@@ -69,10 +75,11 @@ const App: React.FC = () => {
           { id: 'P002', name: 'Production Mirror', status: ItemStatus.INACTIVE, createdAt: '2023-12-15', responsible: 'Jane Smith', description: 'Cópia exata do ambiente produtivo', goodPut: '980 Mbps', txDown: '1.2 Gbps', txUp: '500 Mbps' },
         ]} />;
       case 'tests':
-        return <Modules type="tests" title="Testes de Validação" initialItems={[
-          { id: 'T981', name: 'Auth Flow #441', status: ItemStatus.SUCCESS, createdAt: '2024-04-10', responsible: 'John Doe' },
-          { id: 'T982', name: 'Checkout Logic #88', status: ItemStatus.FAILED, createdAt: '2024-04-10', responsible: 'John Doe' },
-        ]} />;
+        const testData: ModuleItem[] = [
+          { id: 'T981', name: 'Protocolo Alpha', status: ItemStatus.SUCCESS, createdAt: '2024-04-10', responsible: 'John Doe', caderno: 'CAD-001', titulo: 'Validar Autenticação L2', categoria: 'Segurança', catTR: 'TR-1', local: 'Lab A', ref: 'REF-88', especif: 'IEEE 802.1X' },
+          { id: 'T982', name: 'Protocolo Beta', status: ItemStatus.FAILED, createdAt: '2024-04-10', responsible: 'John Doe', caderno: 'CAD-002', titulo: 'Stress Test WiFi 6', categoria: 'Performance', catTR: 'TR-3', local: 'Câmara RF', ref: 'REF-92', especif: 'MCS11 / 160MHz' },
+        ];
+        return <Modules type="tests" title="Testes de Validação" initialItems={testData} />;
       case 'admin':
         return user.role === UserRole.ADMIN ? <Admin /> : <Dashboard user={user} />;
       default:
