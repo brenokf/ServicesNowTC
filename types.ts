@@ -56,6 +56,14 @@ export interface ModuleItem {
   status: ItemStatus;
   createdAt: string;
   responsible: string;
+  description?: string;
+  // Specific fields for notebooks/profiles
+  type?: string;
+  tests?: string;
+  approval?: string;
+  goodPut?: string;
+  txDown?: string;
+  txUp?: string;
 }
 
 export type ModuleType = 'devices' | 'notebooks' | 'profiles' | 'tests' | 'admin' | 'dashboard' | 'projects';

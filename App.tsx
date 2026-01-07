@@ -7,7 +7,7 @@ import Dashboard from './pages/Dashboard';
 import Modules from './pages/Modules';
 import Admin from './pages/Admin';
 import Projects from './pages/Projects';
-import { User, UserRole, ModuleType } from './types';
+import { User, UserRole, ModuleType, ItemStatus } from './types';
 import { MOCK_USERS, MOCK_DEVICES } from './constants';
 
 const App: React.FC = () => {
@@ -55,21 +55,21 @@ const App: React.FC = () => {
       case 'projects':
         return <Projects user={user} />;
       case 'devices':
-        return <Modules type="devices" title="Device Asset Management" initialItems={MOCK_DEVICES} />;
+        return <Modules type="devices" title="Gerenciamento de Dispositivos" initialItems={MOCK_DEVICES} />;
       case 'notebooks':
-        return <Modules type="notebooks" title="Execution Notebooks" initialItems={[
-          { id: 'N001', name: 'UI Regression Suite', status: 'Active' as any, createdAt: '2024-04-01', responsible: 'John Doe' },
-          { id: 'N002', name: 'API Load Profile', status: 'Pending' as any, createdAt: '2024-04-05', responsible: 'Admin User' },
+        return <Modules type="notebooks" title="Cadernos de Teste" initialItems={[
+          { id: 'N001', name: 'UI Regression Suite', status: ItemStatus.ACTIVE, createdAt: '2024-04-01', responsible: 'John Doe', description: 'Testes de interface de alta fidelidade', tests: '144', type: 'Funcional', approval: '98%' },
+          { id: 'N002', name: 'API Load Profile', status: ItemStatus.PENDING, createdAt: '2024-04-05', responsible: 'Admin User', description: 'Validação de estresse de backend', tests: '88', type: 'Performance', approval: '92%' },
         ]} />;
       case 'profiles':
         return <Modules type="profiles" title="System Profiles" initialItems={[
-          { id: 'P001', name: 'Staging Environment', status: 'Active' as any, createdAt: '2023-11-20', responsible: 'Admin User' },
-          { id: 'P002', name: 'Production Mirror', status: 'Inactive' as any, createdAt: '2023-12-15', responsible: 'Jane Smith' },
+          { id: 'P001', name: 'Staging Environment', status: ItemStatus.ACTIVE, createdAt: '2023-11-20', responsible: 'Admin User', description: 'Ambiente de pré-produção', goodPut: '450 Mbps', txDown: '800 Mbps', txUp: '200 Mbps' },
+          { id: 'P002', name: 'Production Mirror', status: ItemStatus.INACTIVE, createdAt: '2023-12-15', responsible: 'Jane Smith', description: 'Cópia exata do ambiente produtivo', goodPut: '980 Mbps', txDown: '1.2 Gbps', txUp: '500 Mbps' },
         ]} />;
       case 'tests':
-        return <Modules type="tests" title="Validation Tests" initialItems={[
-          { id: 'T981', name: 'Auth Flow #441', status: 'Success' as any, createdAt: '2024-04-10', responsible: 'John Doe' },
-          { id: 'T982', name: 'Checkout Logic #88', status: 'Failed' as any, createdAt: '2024-04-10', responsible: 'John Doe' },
+        return <Modules type="tests" title="Testes de Validação" initialItems={[
+          { id: 'T981', name: 'Auth Flow #441', status: ItemStatus.SUCCESS, createdAt: '2024-04-10', responsible: 'John Doe' },
+          { id: 'T982', name: 'Checkout Logic #88', status: ItemStatus.FAILED, createdAt: '2024-04-10', responsible: 'John Doe' },
         ]} />;
       case 'admin':
         return user.role === UserRole.ADMIN ? <Admin /> : <Dashboard user={user} />;
