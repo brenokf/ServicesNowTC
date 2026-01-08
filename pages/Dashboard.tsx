@@ -92,6 +92,8 @@ const Dashboard: React.FC<DashboardProps> = ({ user }) => {
     selectedClient === 'All' || p.client === selectedClient
   );
 
+  const pendingCount = MOCK_PROJECTS.filter(p => p.status === ItemStatus.PENDING).length;
+
   useEffect(() => {
     const fetchInsights = async () => {
       try {
@@ -168,7 +170,7 @@ const Dashboard: React.FC<DashboardProps> = ({ user }) => {
             Executive Intelligence Console
           </span>
           <h2 className="text-4xl font-black text-slate-900 tracking-tight leading-none">
-            Nexus Dashboard
+            STB Dashboard
           </h2>
           <p className="text-slate-500 font-medium mt-2">
             Monitorando {GLOBAL_NODES.length} nós de infraestrutura e {myProjects.length} fluxos de trabalho.
@@ -183,15 +185,16 @@ const Dashboard: React.FC<DashboardProps> = ({ user }) => {
           <StatBox label="Node Capacity" value="88%" trend="Optimal" icon="M13 10V3L4 14h7v7l9-11h-7z" color="amber" />
         </div>
 
-        <div className="col-span-12 lg:col-span-4">
-          <div className="bg-slate-900 rounded-[2.5rem] p-8 text-white h-full relative overflow-hidden group shadow-xl">
-             <div className="flex items-center gap-2 mb-4">
-                <div className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse shadow-[0_0_8px_indigo]"></div>
-                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">AI Analyst</span>
+            <div className="col-span-12 lg:col-span-4">
+             <div className="bg-white rounded-[2.5rem] p-8 text-slate-900 h-full relative overflow-hidden shadow-sm border border-slate-100">
+               <div className="flex items-center gap-2 mb-4">
+                 <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse shadow-[0_0_8px_#f59e0b]"></div>
+                 <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Projetos Pendentes</span>
+               </div>
+               <p className="text-5xl font-black mt-4">{pendingCount}</p>
+               <p className="text-sm text-slate-500 mt-2">Total de projetos com status <strong>PENDING</strong></p>
              </div>
-             <p className="text-lg font-bold leading-relaxed">"{aiInsight}"</p>
-          </div>
-        </div>
+            </div>
 
         {isAdmin && (
           <div className="col-span-12">
