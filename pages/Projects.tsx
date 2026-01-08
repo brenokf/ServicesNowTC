@@ -237,20 +237,23 @@ const Projects: React.FC<ProjectsProps> = ({ user }) => {
             </div>
 
             <div className="p-10 overflow-y-auto custom-scrollbar flex-1 bg-white">
+              {/* Universal Metadata Header for all tabs */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-10 animate-fadeIn">
+                <MetaItem label="titulo" value={selectedProject.name} />
+                <MetaItem label="fabricante" value="Samsung Electronics" />
+                <MetaItem label="DUT" value="DEV-992-TX" />
+                <MetaItem label="versão do software" value="One UI 6.1 (v.14.2)" />
+                <MetaItem label="tipo de homologação" value="Completa / Tier 1" />
+                <MetaItem label="data" value="12/10/2024" />
+                <MetaItem label="entregas" value="Lote 01, Lote 02" />
+                <MetaItem label="status" value={selectedProject.status} />
+                <MetaItem label="id do caderno" value="CAD-2024-UX-V3" />
+              </div>
+
+              <div className="w-full h-px bg-slate-100 mb-10"></div>
+
               {activeTab === 'Projeto' && (
                 <div className="space-y-10 animate-fadeIn">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <MetaItem label="titulo" value={selectedProject.name} />
-                    <MetaItem label="fabricante" value="Samsung Electronics" />
-                    <MetaItem label="dtu" value="DEV-992-TX" />
-                    <MetaItem label="versão do software" value="One UI 6.1 (v.14.2)" />
-                    <MetaItem label="tipo de homologação" value="Completa / Tier 1" />
-                    <MetaItem label="data" value="12/10/2024" />
-                    <MetaItem label="entregas" value="Lote 01, Lote 02" />
-                    <MetaItem label="status" value={selectedProject.status} />
-                    <MetaItem label="id do caderno" value="CAD-2024-UX-V3" />
-                  </div>
-
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm relative overflow-hidden group">
                       <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50/50 rounded-full -mr-16 -mt-16 blur-2xl"></div>
@@ -294,13 +297,150 @@ const Projects: React.FC<ProjectsProps> = ({ user }) => {
                 </div>
               )}
 
-              {activeTab !== 'Projeto' && (
-                <div className="flex flex-col items-center justify-center py-32 animate-fadeIn">
-                  <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mb-6 text-slate-300 border border-slate-100">
-                    <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+              {activeTab === 'LOGS' && (
+                <div className="space-y-10 animate-fadeIn">
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <button className="flex-1 py-4 bg-indigo-600 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-indigo-100 flex items-center justify-center gap-2 hover:bg-indigo-700 transition-all">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                      Exibir Coletas
+                    </button>
+                    <button className="flex-1 py-4 bg-slate-900 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl shadow-slate-200 flex items-center justify-center gap-2 hover:bg-black transition-all">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                      Exportar Resultados
+                    </button>
                   </div>
-                  <h4 className="text-xl font-black text-slate-900 tracking-tight">Conteúdo: {activeTab}</h4>
-                  <p className="text-slate-500 text-sm mt-2 font-medium">Renderização dinâmica da aba de detalhamento técnico.</p>
+
+                  <div className="bg-white rounded-[2.5rem] border border-slate-200 shadow-sm overflow-hidden">
+                    <div className="px-8 py-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+                      <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Logs Coletados</h4>
+                      <span className="text-[10px] font-black text-indigo-500 bg-indigo-50 px-2 py-0.5 rounded-lg">LIVE CAPTURE</span>
+                    </div>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-left">
+                        <thead>
+                          <tr className="bg-white border-b border-slate-50">
+                            <th className="px-8 py-4 text-[9px] font-black text-slate-400 uppercase tracking-widest">Arquivo</th>
+                            <th className="px-8 py-4 text-[9px] font-black text-slate-400 uppercase tracking-widest">Status</th>
+                            <th className="px-8 py-4 text-[9px] font-black text-slate-400 uppercase tracking-widest text-right">Excluir</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-50">
+                          <tr className="hover:bg-slate-50 transition-colors">
+                            <td className="px-8 py-4">
+                              <div className="flex items-center gap-3">
+                                <svg className="w-4 h-4 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                                <span className="text-xs font-bold text-slate-900">yeyuuyeiieu-exoiq.txt</span>
+                              </div>
+                            </td>
+                            <td className="px-8 py-4">
+                              <span className="px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded-lg text-[10px] font-black uppercase tracking-widest">Coletado</span>
+                            </td>
+                            <td className="px-8 py-4 text-right">
+                              <button className="p-2 text-slate-300 hover:text-rose-500 transition-all">
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                              </button>
+                            </td>
+                          </tr>
+                          <tr className="hover:bg-slate-50 transition-colors">
+                            <td className="px-8 py-4">
+                              <div className="flex items-center gap-3">
+                                <svg className="w-4 h-4 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                                <span className="text-xs font-bold text-slate-900">system-boot-trace-882.log</span>
+                              </div>
+                            </td>
+                            <td className="px-8 py-4">
+                              <span className="px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded-lg text-[10px] font-black uppercase tracking-widest">Coletado</span>
+                            </td>
+                            <td className="px-8 py-4 text-right">
+                              <button className="p-2 text-slate-300 hover:text-rose-500 transition-all">
+                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 'FUNCION' && (
+                <div className="space-y-10 animate-fadeIn">
+                  <div className="bg-slate-50 p-6 rounded-[2.5rem] border border-slate-100">
+                    <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6 px-2">Status do Caderno</h4>
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                      <CounterItem label="OK (%)" value="75%" color="text-emerald-500" />
+                      <CounterItem label="FALHA (%)" value="4%" color="text-rose-500" />
+                      <CounterItem label="N/A (%)" value="10%" color="text-slate-400" />
+                      <CounterItem label="NST (%)" value="6%" color="text-amber-500" />
+                      <CounterItem label="PENDENTE" value="5/100%" color="text-indigo-400" />
+                      <CounterItem label="TOTAL" value="100%" color="text-slate-900" isBold />
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex items-center justify-between mb-6 px-2">
+                      <h3 className="text-xl font-black text-slate-900 tracking-tight flex items-center gap-3">
+                        <span className="w-1.5 h-6 bg-indigo-600 rounded-full"></span>
+                        Testes de Funcionalidades
+                      </h3>
+                      <span className="text-[10px] font-black text-indigo-500 bg-indigo-50 px-2 py-1 rounded-lg">45 TESTES CARREGADOS</span>
+                    </div>
+
+                    <div className="bg-white rounded-[2.5rem] border border-slate-200 shadow-sm overflow-hidden">
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-left">
+                          <thead>
+                            <tr className="bg-slate-50/50 border-b border-slate-100">
+                              <th className="px-6 py-4 text-[9px] font-black text-slate-400 uppercase tracking-widest">#</th>
+                              <th className="px-4 py-4 text-[9px] font-black text-slate-400 uppercase tracking-widest">ID</th>
+                              <th className="px-4 py-4 text-[9px] font-black text-slate-400 uppercase tracking-widest">Categoria</th>
+                              <th className="px-4 py-4 text-[9px] font-black text-slate-400 uppercase tracking-widest">Subcategoria</th>
+                              <th className="px-4 py-4 text-[9px] font-black text-slate-400 uppercase tracking-widest">Título</th>
+                              <th className="px-4 py-4 text-[9px] font-black text-slate-400 uppercase tracking-widest">Resultado Obtido</th>
+                              <th className="px-4 py-4 text-[9px] font-black text-slate-400 uppercase tracking-widest">Status</th>
+                              <th className="px-6 py-4 text-[9px] font-black text-slate-400 uppercase tracking-widest">Responsável</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-slate-50">
+                            {[1, 2, 3].map((i) => (
+                              <tr key={i} className="hover:bg-slate-50 transition-colors text-[12px]">
+                                <td className="px-6 py-4 font-mono text-slate-400">{i}</td>
+                                <td className="px-4 py-4 font-black text-indigo-600">FNC-00{i}</td>
+                                <td className="px-4 py-4 font-bold text-slate-500 uppercase">WiFi Security</td>
+                                <td className="px-4 py-4 font-medium text-slate-400 italic">WPA3-SAE</td>
+                                <td className="px-4 py-4 font-black text-slate-900">Handshake Validation #{i}</td>
+                                <td className="px-4 py-4 font-medium text-slate-600">Protocol completed in 14ms</td>
+                                <td className="px-4 py-4">
+                                  <span className="px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded-lg text-[10px] font-black uppercase tracking-widest">OK</span>
+                                </td>
+                                <td className="px-6 py-4">
+                                  <div className="flex items-center gap-2">
+                                    <div className="w-6 h-6 rounded-full bg-slate-200 overflow-hidden ring-1 ring-slate-100">
+                                      <img src={`https://i.pravatar.cc/150?u=${i}`} alt="" />
+                                    </div>
+                                    <span className="font-bold text-slate-600 truncate max-w-[80px]">Eng. Carlos</span>
+                                  </div>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {activeTab !== 'Projeto' && activeTab !== 'LOGS' && activeTab !== 'FUNCION' && (
+                <div className="space-y-10 animate-fadeIn">
+                  <div className="flex flex-col items-center justify-center py-16 bg-slate-50/50 rounded-[2.5rem] border border-dashed border-slate-200">
+                    <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-4 text-slate-300 border border-slate-100 shadow-sm">
+                      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                    </div>
+                    <h4 className="text-lg font-black text-slate-900 tracking-tight">Conteúdo: {activeTab}</h4>
+                    <p className="text-slate-500 text-xs mt-2 font-medium">Renderização de dados técnicos específicos do módulo.</p>
+                  </div>
                 </div>
               )}
             </div>
@@ -329,9 +469,9 @@ const CounterItem = ({ label, value, color, isBold }: { label: string, value: st
 );
 
 const MetaItem = ({ label, value }: { label: string, value: string }) => (
-  <div className="p-5 bg-white border border-slate-100 rounded-3xl shadow-sm">
-    <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">{label}</p>
-    <p className="text-[13px] font-black text-slate-900 truncate">{value}</p>
+  <div className="p-4 bg-white border border-slate-100 rounded-2xl shadow-sm hover:border-indigo-100 transition-colors">
+    <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-1">{label}</p>
+    <p className="text-[11px] font-black text-slate-900 truncate">{value}</p>
   </div>
 );
 
