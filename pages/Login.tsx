@@ -151,13 +151,13 @@ const Login: React.FC<LoginProps> = ({ onLogin, onForgotPassword }) => {
         <div className="bg-white rounded-[2.5rem] shadow-[0_20px_80px_-15px_rgba(0,0,0,0.6)] p-8 lg:p-10 border border-white/10">
             {/* Minimalist Logo/Header */}
             <div className="flex flex-col items-center mb-8">
-              <div className="w-16 h-16 bg-[#000000] rounded-2xl flex items-center justify-center shadow-xl shadow-red-600/20 mb-4 transition-transform hover:scale-105 active:scale-95 cursor-pointer">
-                <span className="font-black text-white text-2xl">
-                  <img src="../assets/logo.png" alt="Logo" />
-                </span>
+              <div className="w-16 h-16 bg-[#000000] rounded-2xl shadow-xl shadow-red-600/20 mb-4 transition-transform hover:scale-105 active:scale-95 cursor-pointer overflow-hidden flex items-center justify-center">
+                 <span className='flex w-12 h-12 items-center justify-center '>
+                      <img src="../assets/logo.png" alt="Logo" className="w-full h-full object-cover rounded-full object-center" />
+                </span> 
               </div>
               <h1 className="text-2xl text-black tracking-tightest"><strong><b>TAD</b></strong>TELMAX</h1>
-              <p className="text-zinc-400 mt-1 font-bold uppercase text-[9px] tracking-[0.3em]">Protocolo de Segurança</p>
+              <p className="text-zinc-400 mt-1 font-bold uppercase text-[9px] tracking-[0.3em]">TADTELMAX WORLDWIDE</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5">
@@ -174,16 +174,7 @@ const Login: React.FC<LoginProps> = ({ onLogin, onForgotPassword }) => {
               </div>
 
               <div className="space-y-1.5">
-                <div className="flex justify-between items-center px-1">
-                  <label className="block text-[9px] font-black text-zinc-500 uppercase tracking-widest">Senha</label>
-                  <button 
-                    type="button" 
-                    onClick={onForgotPassword}
-                    className="text-[9px] font-black text-[#e1251a] uppercase tracking-wider hover:opacity-70 transition-all outline-none"
-                  >
-                    Esqueci a senha
-                  </button>
-                </div>
+                <label className="block text-[9px] font-black text-zinc-500 uppercase tracking-widest">Senha</label>
                 <input 
                   type="password" 
                   className="w-full px-6 py-4 bg-zinc-50 border border-zinc-100 rounded-2xl focus:outline-none focus:ring-4 focus:ring-[#e1251a]/5 focus:border-[#e1251a] transition-all font-bold text-sm text-black placeholder:text-zinc-300"
@@ -199,23 +190,12 @@ const Login: React.FC<LoginProps> = ({ onLogin, onForgotPassword }) => {
                   type="submit"
                   className="w-full bg-[#e1251a] hover:bg-black text-white font-black py-4 rounded-2xl shadow-lg shadow-red-600/10 active:scale-[0.97] transition-all uppercase text-[11px] tracking-[0.2em]"
                 >
-                  Entrar no Sistema
+                  Entrar
                 </button>
               </div>
             </form>
 
-            {/* Bottom Section - Request Access Link */}
-            <div className="mt-8 pt-6 border-t border-zinc-100 flex flex-col items-center">
-              <button 
-                onClick={() => setIsRequestModalOpen(true)}
-                className="text-[10px] font-black text-zinc-400 hover:text-black uppercase tracking-[0.1em] transition-all flex items-center gap-2 group outline-none"
-              >
-                Requerer acesso à aplicação
-                <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </button>
-            </div>
+
         </div>
         
         {/* Compact Footer Info */}
