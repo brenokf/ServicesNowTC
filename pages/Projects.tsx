@@ -63,7 +63,7 @@ const Projects: React.FC<ProjectsProps> = ({ user }) => {
         {isAdmin && (
           <button 
             onClick={() => handleOpenNewModal()} 
-            className="bg-indigo-600 text-white px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-indigo-100 hover:bg-indigo-700 transition-all flex items-center gap-2"
+            className="bg-[#e1251a] text-white px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-indigo-100 hover:bg-[#bd1c14] transition-all flex items-center gap-2"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
@@ -188,7 +188,7 @@ const Projects: React.FC<ProjectsProps> = ({ user }) => {
             </div>
             <div className="p-8 bg-slate-50 border-t border-slate-100 flex gap-4 shrink-0">
               <button onClick={handleCloseModals} className="flex-1 py-4 text-xs font-black text-slate-600 bg-white border border-slate-200 rounded-2xl uppercase tracking-widest hover:bg-slate-50 transition-all">Voltar</button>
-              <button onClick={handleCloseModals} className="flex-[2] py-4 text-xs font-black text-white bg-indigo-600 rounded-2xl shadow-xl uppercase tracking-widest hover:bg-indigo-700 transition-all">{selectedProject ? 'Salvar Alterações' : 'Cadastrar Projeto'}</button>
+              <button onClick={handleCloseModals} className="flex-[2] py-4 text-xs font-black text-white bg-[#e1251a] rounded-2xl shadow-xl uppercase tracking-widest hover:bg-[#bd1c14] transition-all">{selectedProject ? 'Salvar Alterações' : 'Cadastrar Projeto'}</button>
             </div>
           </div>
         </div>,
