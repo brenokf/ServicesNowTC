@@ -1,5 +1,5 @@
 {
-  "name": "Nexus Device Management System",
+  "name": "TADTELMAX System",
   "description": "A comprehensive corporate web application for managing, monitoring, and testing devices with advanced user permissions and audit logging.",
   "requestFramePermissions": [
     "camera",
