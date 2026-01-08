@@ -532,7 +532,7 @@ const Modules: React.FC<ModulesProps> = ({ type, title, initialItems }) => {
           <h2 className="text-3xl font-black text-slate-900 tracking-tighter">{title}</h2>
           <p className="text-slate-500 text-sm mt-1">Gestão centralizada de ativos do módulo {type}.</p>
         </div>
-        <button onClick={handleCreateNew} className="bg-indigo-600 text-white px-8 py-3.5 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-indigo-100 hover:bg-indigo-700 transition-all flex items-center justify-center gap-2">
+        <button onClick={handleCreateNew} className="bg-[#e1251a] text-white px-8 py-3.5 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-indigo-100 hover:bg-[#bd1c14] transition-all flex items-center justify-center gap-2">
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 4v16m8-8H4" /></svg>
           Cadastrar Novo
         </button>
